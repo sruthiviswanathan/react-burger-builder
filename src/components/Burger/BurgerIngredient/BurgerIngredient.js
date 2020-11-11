@@ -31,8 +31,21 @@ const BurgerIngredient = (props) => {
         case ('salad'): 
             ingredient = <div className={classes.Salad}></div>;
             break;
+        case ('onions'): 
+            const onions = [];
+            for (let i = 1; i <= 10; i++) {
+                onions.push(<div className={classes.Onions} key={i} />);
+            }
+            ingredient = <div>{onions}</div>
+        break;
         case ('bacon'): 
             ingredient = <div className={classes.Bacon}></div>;
+            break;
+        case ('extraCheese'):
+            ingredient = <div className={classes.ExtraCheese}>
+                        <div className={classes.CheeseFlowLeft}></div>
+                        <div className={classes.CheeseFlowRight}></div>
+                        </div>
             break;
         default:
             ingredient = null;

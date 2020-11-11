@@ -111,3 +111,33 @@
     background: linear-gradient(#bf3813, #c45e38);
     margin: 2% auto;
 }
+
+.Onions {
+  display: inline-block;
+  width: 7%;
+  height: 10px;
+  background-color: purple;
+  margin: 2px;
+  border-radius: 50%;
+}
+
+.ExtraCheese {
+  width: 90%;
+  height: 24px;
+  background: linear-gradient(#f4d004, #d6bb22);
+  border-radius: 10px;
+  margin: 2% auto;
+}
+
+.CheeseFlowRight, .CheeseFlowLeft {
+  display: inline-block;
+  background: linear-gradient(#f4d004, #d6bb22);
+  height: 30px;
+  width: 3%;
+  border-radius: 30%;
+  margin-left: 0px;
+}
+
+.CheeseFlowRight {
+  margin-left: 280px;
+}

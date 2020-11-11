@@ -6,7 +6,9 @@ import classes from './BuildControls.module.css';
 const controls = [
     { label: 'Salad',  type: 'salad'},
     { label: 'Bacon',  type: 'bacon'},
+    { label: 'Onions',  type: 'onions'},
     { label: 'Cheese',  type: 'cheese'},
+    { label: 'Extra-Cheese', type: 'extraCheese'},
     { label: 'Meat',  type: 'meat'}
 ];
 
