@@ -3,6 +3,8 @@ import Auxillary from '../../hoc/Auxillary/Auxillary';
 
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENTS_PRICES = {
     salad: 0.5,
@@ -21,7 +23,8 @@ class BurgerBuilder extends Component {
             meat: 0
         },
         totalPrice: 4,
-        purchasable: false
+        purchasable: false,
+        purchasing: false,
     }
 
     addIngredientHandler = (type) => {
@@ -74,6 +77,22 @@ class BurgerBuilder extends Component {
         });
     }
 
+    purchaseHandler = () => {
+        this.setState({
+            purchasing: true
+        });
+    }
+
+    cancelPurchaseHandler = () => {
+        this.setState({
+            purchasing: false
+        });
+    }
+
+    confirmPurchaseHandler = () => {
+        alert('Confirmed purchase! Delicious burger on the way!!');
+    }
+
     render() {
         let disabledInfo = {
             ...this.state.ingredients
@@ -83,6 +102,12 @@ class BurgerBuilder extends Component {
         }
         return(
             <Auxillary>
+                <Modal show={this.state.purchasing} closeModal={this.cancelPurchaseHandler}>
+                    <OrderSummary ingredients= {this.state.ingredients} 
+                    cancelPurchase={this.cancelPurchaseHandler} 
+                    confirmPurchase={this.confirmPurchaseHandler}
+                    totalPrice={this.state.totalPrice} />
+                </Modal>
                 <div>
                    <Burger ingredients={this.state.ingredients} />
                 </div>
@@ -92,7 +117,8 @@ class BurgerBuilder extends Component {
                     ingredientAdded={this.addIngredientHandler} 
                     ingredientRemoved={this.removeIngredientHandler} 
                     disabled= {disabledInfo}
-                    purchasable={this.state.purchasable}/>
+                    purchasable={this.state.purchasable}
+                    purchased={this.purchaseHandler}/>
                 </div>
             </Auxillary>
         );
