@@ -7,7 +7,7 @@
     font: inherit;
     padding: 10px;
     margin: 10px;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 .Button:first-of-type {
@@ -21,4 +21,8 @@
 
 .Danger {
     color: #944317;
+}
+
+.Button:disabled {
+    cursor: not-allowed;
 }

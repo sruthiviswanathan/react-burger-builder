@@ -14,22 +14,40 @@ const Order = (props) => {
     }
 
     const ingredientOutput = ingredients.map(ig => {
-        return <span style={{textTransform: 'capitalize', 
-                              display: 'inline-block',
-                              border: '1px solid #ccc',
-                              boxShadow: '0 2px 3px solid #eee',
-                              margin: 'auto 5px',
-                              padding: '2px'
-    }} key={ig.name}> {ig.name}: ({ig.amount}) </span>
+    //     return <span style={{textTransform: 'capitalize', 
+    //                           display: 'inline-block',
+    //                           border: '1px solid #ccc',
+    //                           boxShadow: '0 2px 3px solid #eee',
+    //                           margin: 'auto 5px',
+    //                           padding: '2px'
+    // }} key={ig.name}> {ig.name}: ({ig.amount}) </span>
+        return (
+            <div className={classes.Ingredients} key={ig.name}>
+                {ig.name}: ({ig.amount})
+            </div>
+        )
     });
 
     return (
         <div className={classes.Order}>
-            <p>Ingredients: {
+            <div className={classes.IngredientContainer}>Ingredients: {
                 ingredientOutput
             }
-            </p>
             <p>Price: ₹ {props.price.toFixed(2)} </p>
+            </div>
+            
+            <div className={classes.OrderDetails}>
+                <p>Order Details : </p>
+                <p>Customer Name: {props.orderData.name}</p>
+                <p>Email: {props.orderData.email}</p>
+            </div>
+
+            <div className={classes.DeliveryDetails}>
+                <p>Delivery Details : </p>
+                <p>Delivery Method: {props.orderData.deliveryMethod}</p>
+                <p>Delivery Address: {props.orderData.address}</p>
+            </div>
+            
         </div>
     );
 }

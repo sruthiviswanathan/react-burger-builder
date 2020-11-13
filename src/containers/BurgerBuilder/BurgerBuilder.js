@@ -37,7 +37,6 @@ class BurgerBuilder extends Component {
             this.setState({
                 error: true
             });
-            console.log(error);
         });
     }
 
