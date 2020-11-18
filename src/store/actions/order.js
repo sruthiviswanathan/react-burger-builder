@@ -2,9 +2,10 @@ import * as ActionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
 
-export const getAllOrders = () => {
+export const getAllOrders = (token, userId) => {
     return dispatch => {
-        axios.get('/orders.json').then(response => {
+        dispatch(fetchOrderStart());
+        axios.get('/orders.json?auth='+ token + '&orderBy="userId"&equalTo="' + userId + '"').then(response => {
             const fetchedOrders = [];
             for (let key in response.data) {
                 fetchedOrders.push({
@@ -24,10 +25,17 @@ export const fetchOrderStart = () => {
     }
 }
 
+export const purchaseReset = () => {
+    return {
+        type: ActionTypes.PURCHASE_RESET
+    };
+}
+
 export const fetchOrders = (orderDetails) => {
     return  {
         type: ActionTypes.FETCH_ALL_ORDERS,
-        orders: orderDetails
+        orders: orderDetails,
+        orderLoading: false
     };
 }
 
@@ -37,9 +45,10 @@ export const fetchOrdersErrorHandler = () => {
     }
 }
 
-export const orderHandler = (orderData) => {
+export const orderHandler = (orderData, token) => {
+    console.log(orderData);
     return dispatch => {
-        axios.post('/orders.json', orderData)
+        axios.post('/orders.json?auth='+token, orderData)
         .then(response => {
             dispatch(orderSuccess(orderData, response.data));
         }).catch(error => {

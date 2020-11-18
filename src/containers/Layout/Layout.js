@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { connect } from 'react-redux';
  
 import Auxillary from '../../hoc/Auxillary/Auxillary';
 import classes from './Layout.module.css';
@@ -27,8 +28,8 @@ const Layout = (props) => {
     return (
         <Auxillary>
         <div>
-            <Toolbar toggle={sideDrawerToggleHandler} />
-            <SideDrawer open={sideDrawerState.showSideDrawer} closed={closeSideDrawerHandler}  />
+            <Toolbar auth={props.isAuthenticated} toggle={sideDrawerToggleHandler} />
+            <SideDrawer auth={props.isAuthenticated} open={sideDrawerState.showSideDrawer} closed={closeSideDrawerHandler}  />
         </div>
         <main className={classes.Content}>
             {props.children}
@@ -37,4 +38,10 @@ const Layout = (props) => {
     );
 };
 
-export default Layout;
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.authReducer.isAuthenticated
+    };
+}
+
+export default connect(mapStateToProps)(Layout);

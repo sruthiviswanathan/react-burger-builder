@@ -10,12 +10,20 @@ import * as orderActionCreator from '../../store/actions/index';
 class Orders extends Component {
 
     componentWillMount = () => {
-        this.props.onInitOrderFetchStart();
-        this.props.onInitOrdersFetch();
+        this.props.onInitOrdersFetch(this.props.token, this.props.userId);
     }
 
     render() {
             let orders = <Spinner/>;
+
+            if (!this.props.loading) {
+                orders = <p style={{textAlign: "center"}}> No orders found!!</p>
+            }
+
+            if (this.props.error) {
+               orders = <p style={{textAlign: "center"}}>Something went wrong</p>;
+            }
+
             if (this.props.orders.length > 0) {
                 orders = (
                     this.props.orders.map((order) => {
@@ -35,14 +43,16 @@ class Orders extends Component {
 const mapStateToProps = state => {
     return {
         orders: state.orderReducer.orders,
-        loading: state.orderReducer.orderLoading
+        loading: state.orderReducer.orderLoading,
+        error: state.orderReducer.error,
+        token: state.authReducer.token,
+        userId: state.authReducer.userId
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInitOrderFetchStart: () => dispatch(orderActionCreator.fetchOrderStart()),
-        onInitOrdersFetch: () => dispatch(orderActionCreator.getAllOrders())
+        onInitOrdersFetch: (token, userId) => dispatch(orderActionCreator.getAllOrders(token, userId))
     }
 }
 

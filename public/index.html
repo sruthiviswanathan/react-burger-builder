@@ -29,6 +29,30 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyC9_MpR-baQiS-YM3MjLAcQI7c7Tj6fqLU",
+        authDomain: "burger-builder-app-82f8b.firebaseapp.com",
+        databaseURL: "https://burger-builder-app-82f8b.firebaseio.com",
+        projectId: "burger-builder-app-82f8b",
+        storageBucket: "burger-builder-app-82f8b.appspot.com",
+        messagingSenderId: "1073398614210",
+        appId: "1:1073398614210:web:4b242a4da182c9a73bd35b",
+        measurementId: "G-NXD72CEF5Z"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.

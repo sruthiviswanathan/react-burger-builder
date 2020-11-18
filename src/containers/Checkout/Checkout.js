@@ -5,9 +5,14 @@ import {Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import ContactData from './ContactData/ContactData';
+import * as actions from '../../store/actions/index';
 
 
 class Checkout extends Component { 
+
+    componentDidMount () {
+        this.props.setPurchasedToFalse();
+    }
 
     checkoutCancelledHandler = () => {
         this.props.history.goBack();
@@ -45,4 +50,10 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps)(Checkout);
+const mapDispatchToProps = dispatch => {
+    return {
+        setPurchasedToFalse: () => dispatch(actions.purchaseReset())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

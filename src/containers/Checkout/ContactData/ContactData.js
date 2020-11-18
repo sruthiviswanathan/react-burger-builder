@@ -139,12 +139,13 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ings,
             price: this.props.price,
-            orderData: formData
-            };
+            orderData: formData,
+            userId: this.props.userId
+        };
             
             if (this.state.isFormValid) {
                 this.props.orderStartHandler();
-                this.props.orderSuccessHandler(order); 
+                this.props.orderSuccessHandler(order, this.props.token); 
             } else {
                 this.makeAllFieldsTouched();
             }
@@ -204,14 +205,16 @@ const mapStateToProps = state => {
         ings: state.burgerBuilderReducer.ingredients,
         price: state.burgerBuilderReducer.totalPrice,
         loading: state.orderReducer.orderLoading,
-        purchased: state.orderReducer.purchased
+        purchased: state.orderReducer.purchased,
+        token: state.authReducer.token,
+        userId: state.authReducer.userId
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         orderStartHandler: () => dispatch(orderReducer.orderStart()),
-        orderSuccessHandler: (orderData) => dispatch(orderReducer.orderHandler(orderData))
+        orderSuccessHandler: (orderData, token) => dispatch(orderReducer.orderHandler(orderData, token))
     }
 }
 

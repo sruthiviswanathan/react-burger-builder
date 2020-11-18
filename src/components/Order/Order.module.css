@@ -39,7 +39,7 @@
 }
 
 @media (max-width: 500px) {
-    .OrderDetails {
+    .OrderDetails, .DeliveryDetails {
         width: 100%;
     }
 }

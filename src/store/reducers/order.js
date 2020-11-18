@@ -19,6 +19,8 @@ const reducer = (state = initialState, action) => {
             return reducerUtility(state, { error: true, orderLoading: false});
         case actionTypes.ORDER_START: 
             return reducerUtility(state, { orderLoading: true, purchased: false});
+        case actionTypes.PURCHASE_RESET: 
+            return reducerUtility(state, { purchased: false});
         case actionTypes.ORDER_SUCCESS:
             const newOrder =  {
                 ...action.orderData,
