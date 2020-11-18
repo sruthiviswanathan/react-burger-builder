@@ -38,6 +38,7 @@ const Order = (props) => {
             
             <div className={classes.OrderDetails}>
                 <p>Order Details : </p>
+                <p>Order Id: {props.orderId}</p>
                 <p>Customer Name: {props.orderData.name}</p>
                 <p>Email: {props.orderData.email}</p>
             </div>

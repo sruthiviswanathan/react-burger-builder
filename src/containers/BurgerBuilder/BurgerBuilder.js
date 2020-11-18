@@ -15,8 +15,7 @@ import * as burgerBuilderActions from '../../store/actions/index';
 class BurgerBuilder extends Component {
 
     state = {
-        purchasing: false,
-        loading: false
+        purchasing: false
     }
 
     componentWillMount = () => {
@@ -79,10 +78,6 @@ class BurgerBuilder extends Component {
                     cancelPurchase={this.cancelPurchaseHandler} 
                     confirmPurchase={this.confirmPurchaseHandler}
                     totalPrice={this.props.price} />
-        }
-
-        if (this.state.loading) {
-            orderSummary = <Spinner />
         }
 
         return(

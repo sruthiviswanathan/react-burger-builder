@@ -18,18 +18,54 @@ export const getAllOrders = () => {
     }
 }
 
+export const fetchOrderStart = () => {
+    return {
+        type: ActionTypes.FETCH_ORDER_START
+    }
+}
 
 export const fetchOrders = (orderDetails) => {
     return  {
         type: ActionTypes.FETCH_ALL_ORDERS,
-        orders: orderDetails,
-        orderLoading: false
+        orders: orderDetails
     };
 }
 
 export const fetchOrdersErrorHandler = () => {
     return {
-        type: ActionTypes.FETCH_ALL_ORDERS_FAILED,
-        orderLoading: false
+        type: ActionTypes.FETCH_ALL_ORDERS_FAILED
     }
+}
+
+export const orderHandler = (orderData) => {
+    return dispatch => {
+        axios.post('/orders.json', orderData)
+        .then(response => {
+            dispatch(orderSuccess(orderData, response.data));
+        }).catch(error => {
+            dispatch(orderFailed());
+        })
+    }
+}
+
+export const orderStart = () => {
+    return {
+        type: ActionTypes.ORDER_START
+    };
+}
+
+
+export const orderSuccess = (orderData, orderId) => {
+    return {
+        type: ActionTypes.ORDER_SUCCESS,
+        orderData: orderData,
+        orderId: orderId
+    };
+}
+
+export const orderFailed = () => {
+    return {
+        type: ActionTypes.ORDER_FAILED,
+        orderLoading: false
+    };
 }

@@ -6,14 +6,14 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Auxillary from '../../../hoc/Auxillary/Auxillary';
 import Input from '../../../components/UI/Form/Input/Input';
 import { connect } from 'react-redux';
+import ErrorHandler from '../../../hoc/ErrorHandler/ErrorHandler';
 
-import axios from '../../../axios-orders'
+import axios from '../../../axios-orders';
+import  * as orderReducer from '../../../store/actions/index';
 
 class ContactData extends Component {
 
     state = {
-        loading: false,
-        purchased: false,
         orderForm: {
                 name: {
                     elementType: 'input',
@@ -143,18 +143,8 @@ class ContactData extends Component {
             };
             
             if (this.state.isFormValid) {
-                this.setState({loading: true});
-                axios.post('/orders.json', order)
-                .then(response => {
-                    this.setState({
-                        loading: false,
-                        purchased: true
-                    });
-                    this.props.history.push('/');
-                }).catch(error => {
-                    console.log(error);
-                    this.setState({loading: false});
-                })
+                this.props.orderStartHandler();
+                this.props.orderSuccessHandler(order); 
             } else {
                 this.makeAllFieldsTouched();
             }
@@ -192,11 +182,11 @@ class ContactData extends Component {
                 
         );
 
-        if (this.state.loading) {
-            form = <Spinner />
+        if (this.props.loading) {
+            form = <Spinner/>
         }
 
-        if (!this.state.loading && this.state.purchased) {
+        if (!this.props.loading && this.props.purchased) {
             form = <p style={{ color: 'green', textWeight: 'bold'}}>Successfully Purchased!!!</p>
         }
 
@@ -212,8 +202,17 @@ class ContactData extends Component {
 const mapStateToProps = state => {
     return {
         ings: state.burgerBuilderReducer.ingredients,
-        price: state.burgerBuilderReducer.totalPrice
+        price: state.burgerBuilderReducer.totalPrice,
+        loading: state.orderReducer.orderLoading,
+        purchased: state.orderReducer.purchased
     };
 }
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch => {
+    return {
+        orderStartHandler: () => dispatch(orderReducer.orderStart()),
+        orderSuccessHandler: (orderData) => dispatch(orderReducer.orderHandler(orderData))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorHandler(ContactData, axios));
