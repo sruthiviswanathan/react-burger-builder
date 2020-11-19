@@ -46,7 +46,6 @@ export const fetchOrdersErrorHandler = () => {
 }
 
 export const orderHandler = (orderData, token) => {
-    console.log(orderData);
     return dispatch => {
         axios.post('/orders.json?auth='+token, orderData)
         .then(response => {

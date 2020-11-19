@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
         case ActionTypes.AUTH_START:
             return reducerUtility(state, {loading: true});
         case ActionTypes.AUTH_SUCCESS:
-            return reducerUtility(state, { token: action.token, userId: action.userId, isAuthenticated: true, loading: false, error: null});
+            return reducerUtility(state, {token: action.token, userId: action.userId, isAuthenticated: true, loading: false, error: null});
         case ActionTypes.AUTH_FAIL:
             return reducerUtility(state, { token: null, isAuthenticated: false, loading: false, error: action.error});
         case ActionTypes.LOGOUT:

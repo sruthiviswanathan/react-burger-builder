@@ -151,10 +151,9 @@ class Auth extends Component {
         }
 
         let redirect = null;
-        if (this.props.isAuthenticated && this.props.totalPrice > 5) {
+        if (this.props.isAuthenticated && this.props.totalPrice >= 5) {
             redirect = <Redirect to='/checkout'/>;
         }
-
         if (this.props.isAuthenticated && this.props.totalPrice === 5) {
             redirect = <Redirect to='/'/>;
         }

@@ -31,7 +31,7 @@ export const authCheckState = () => {
                 dispatch(authSuccess(userData));
             } else {
                 dispatch(authSuccess(userData));
-                dispatch(checkAuthTimeout((expirationTime.getTime() -  new Date().getTime()))/1000);
+                dispatch(checkAuthTimeout((expirationTime.getTime() -  new Date().getTime())/1000));
             }
             
         }
